@@ -22,9 +22,16 @@ export default {
       address: "",
       nickName: "",
       gender: "",
+      file: "",
     };
   },
   methods: {
+    touxiang(e) {
+      const file = e.target.files[0];
+      const fileURL = URL.createObjectURL(file);
+      this.avatar = fileURL;
+      // console.log(this.avatar);
+    },
     submitEvent() {
       infoAPI({
         birthday: this.birthday,
@@ -37,6 +44,7 @@ export default {
       }).then((res) => {
         if (res.data.code == 1) {
           this.$router.push({ name: "user" });
+          // console.log(res.data);
         }
       });
     },
@@ -51,7 +59,8 @@ export default {
 
       <van-field v-model="age" label="年龄" placeholder="请输入年龄" />
 
-      <van-field v-model="avatar" label="头像" placeholder="请输入头像" />
+      <!-- <van-field v-model="avatar" label="头像" placeholder="请输入头像" /> -->
+      <input type="file" name="头像上传" @change="touxiang" />
 
       <van-field
         v-model="area"

@@ -1,17 +1,18 @@
 <script>
 import { getInfor } from "../../utils/user";
+import { loadImg } from "../../utils/tools";
 export default {
   data() {
     return {
       info: {},
-      nickName: "",
     };
   },
   created() {
     getInfor().then((res) => {
       const info = res.data.data;
       this.info = info;
-      console.log(res);
+      // console.log(this.info);
+      // console.log(res);
       if (info.nickName) {
         this.nickName = info.name;
       } else {
@@ -33,10 +34,7 @@ export default {
 <template>
   <div class="user">
     <div id="touxiang">
-      <img
-        src="https://hbimg.b0.upaiyun.com/9788040ec1ac06fd6447fe8873eb4f050d22bea9ea78-g0BZIT_fw658"
-        alt=""
-      />
+      <img :src="this.info.avatar" alt="" />
     </div>
     <p>{{ info.nickName }}</p>
     <p id="jifen">
